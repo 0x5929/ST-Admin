@@ -1,0 +1,127 @@
+<div id="adminAddForm" ng-controller="adminAddController as admin_add_ctrl">
+	<form>
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="text-center">  Please Enter the Student's Information :</h3>
+				<br>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="enrollmentDate">Enrollment Date:</label>
+			<div class="col-md-9">
+				<input 	type="text" 
+						masked-input
+						target-mask="9999/99/99"
+						mask-options='{"placeholder": "yyyy/mm/dd"}'
+						ng-model="admin_add_ctrl.studentModel.enrollmentDate" 
+						class="form-control" 
+						name="enrollmentDate" 
+						placeholder="Enter Student's Enrollment Date">
+			
+			</div> <!-- JUST NEED TO CONVERT THE STRING INTO DATE OBJECT BEFORE SENDING TO SERVER -->
+		</div> 
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="studentID">Student ID:</label>
+			<div class="col-md-9">
+				<input 	type="text" 
+						masked-input
+						target-mask="99-9999-aa"
+						mask-options='{"placeholder": "R#-ddmm-FL"}'
+						ng-model="admin_add_ctrl.studentModel.studentID" 
+						class="form-control" 
+						name="enrollmentDate" 
+						placeholder="Enter Student ID">
+			
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="name">First Name:</label>
+			<div class="col-md-9">
+				<input type="text" ng-model="admin_add_ctrl.studentModel.firstName" class="form-control" name="name" placeholder="Enter Student's First Name">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="name">Last Name:</label>
+			<div class="col-md-9">
+				<input type="text" ng-model="admin_add_ctrl.studentModel.lastName" class="form-control" name="name" placeholder="Enter Student's Last Name">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="phoneNumber">Phone Number:</label>
+			<div class="col-md-9">
+				<input type="text" 
+						masked-input 
+						target-mask="9999999999" 
+						mask-options='{"placeholder": "*"}'
+						ng-model="admin_add_ctrl.studentModel.phoneNumber" 
+						class="form-control" 
+						name="phoneNumber" 
+						placeholder="Enter Student's Phone Number">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="ssn">Social Security Number:</label>
+			<div class="col-md-9">
+				<input type="text" 
+						masked-input
+						target-mask="999999999"
+						mask-options='{"placeholder": "*"}'
+						ng-model="admin_add_ctrl.studentModel.ssn" 
+						class="form-control" 
+						name="ssn" 
+						placeholder="Enter Student's SSN">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="address">Address:</label>
+			<div class="col-md-9">
+				<input type="text" ng-model="admin_add_ctrl.studentModel.address" class="form-control" name="address" placeholder="Enter Student's address">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="email">email:</label>
+			<div class="col-md-9">
+				<input type="text" ng-model="admin_add_ctrl.studentModel.email" class="form-control" name="email" placeholder="Enter Student's email">
+			</div>
+		</div>
+	<!-- /END OF STRING INPUTS -->
+	
+		<div class="form-group row">
+			<label class="control-label col-md-3" for="marketingSurvey">How did you hear about us?</label>
+			<div class="col-md-9">
+				<select ng-model="admin_add_ctrl.studentModel.marketingSurvey" name="marketingSurvey" class="form-control">
+					<option disabled ng-selected="admin_add_ctrl.ngSelect('marketingSurvey')" value="noneSelected"> -- select an option -- </option>
+					<option ng-selected="admin_add_ctrl.ngSelectOption.chineseInLa" value="Chinese_In_LA">Chinese In LA</option>
+					<option ng-selected="admin_add_ctrl.ngSelectOption.worldJournal" value="World_Journal">World Journal</option>
+					<option ng-selected="admin_add_ctrl.ngSelectOption.craigslist" value="Craigslist">Craigslist</option>
+					<option ng-selected="admin_add_ctrl.ngSelectOption.referredByFriend" value="Referred_By_Friend">Referred by friend</option>
+					<option ng-selected="admin_add_ctrl.ngSelectOption.marketingNone" value="None">None of the above</option>
+				</select>
+			</div>
+		</div>
+	<!-- /END OF OPTION INPUTS -->
+<!-- 		NEW PROGRAM INPUT DIV  -->
+		<div class="form-group row">
+			<label class="control-label col-md-9">Program:</label>
+		</div>
+		<div>
+			<button class="btn" ng-click="admin_add_ctrl.addingProgram()">ADD PROGRAM</button>
+			<ul ng-repeat="eachProgram in admin_add_ctrl.studentModel.program">
+				<li>{{eachProgram.programName}}  <!-- could add more views --></li>
+				<li>{{eachProgram.programRotation}}</li>
+			</ul>
+		</div>
+	<!-- /END OF PROGRAM INPUTS -->
+	<hr>
+	<!-- buttons for submit and cancel/clear -->
+		<div class="text-center">
+			<button class="btn" ng-click="admin_add_ctrl.submit()">Submit</button>
+			<button class="btn" ng-click="admin_add_ctrl.cancelBtn()">Cancel</button>
+			<button class="btn" ng-click="admin_add_ctrl.enterDummyData()">DUMMY DATA</button>
+			<google-signin-btn buttonID="admin_add_ctrl.googleSigninBtnID" options="admin_add_ctrl.googleSigninOptions"></google-signin-btn>
+			<br>
+			<br>
+		</div>
+	</form>
+</div>
+	 

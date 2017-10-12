@@ -1,0 +1,20 @@
+
+<!-- COULD PUT CALENDAR OVER HERE TOO -->
+<!-- OPTIONS SIDE -->
+<div class="container-fluid" id="mainWrapperForAdmin">
+	<div class="row" id="staffStuff">
+		<button class="btn" ui-sref="Admin.Admin_Search">Admin Search</button>
+		<button class="btn" ui-sref="Admin.Admin_Add">Admin Add</button>
+		<div ng-controller="signOutControl as signOutCtrl">
+			<a style="cursor: pointer; cursor: hand;" ng-click="signOutCtrl.signOut();">
+				Sign Out
+			</a>
+		</div>
+		<br>
+	</div>
+	<hr>
+	<!-- OUTPUT SIDE -->
+	<!-- Dynamic content populated by ui view -->
+
+	<div ui-view="AdminView"></div>
+</div>

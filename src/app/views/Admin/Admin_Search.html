@@ -1,0 +1,276 @@
+<div id="adminSearchModifyWrapper" ng-controller="adminSearchController as admin_search_ctrl">
+	<div class="row" id="adminSearch">
+		<div class="col-md-6">
+			<h3 class="text-center">  Search By:</h3>
+			<form class="text-center">
+				<input type="radio" name="searchBy" ng-model="admin_search_ctrl.searchBy" value="Student_Info" >Student Info<br>
+				<input type="radio" name="searchBy" ng-model="admin_search_ctrl.searchBy" value="Program_Info">Program Info<br>
+			</form>
+			<br>
+<!-- /end of search by  -->
+			<form class="text-center" ng-if="admin_search_ctrl.searchBy === 'Student_Info'">
+				<input type="text" ng-model="admin_search_ctrl.searchInput" class="form-control">
+				<select ng-model="admin_search_ctrl.searchParameter" name="seachInputAndParameter" class="form-control">
+					<option disabled ng-selected="true" value=""> -- Select an Input -- </option>
+					<option value="Name">Name</option>
+					<option value="email">email</option>
+					<option value="Phone number">Phone number</option>
+				</select>
+			</form>
+			<form ng-if="admin_search_ctrl.searchBy === 'Program_Info'">
+				<input type="text" class="form-control" ng-model="admin_search_ctrl.searchRotation" placeholder="Please Enter Rotation Number">
+				<select ng-model="admin_search_ctrl.searchProgram" name="searchProgram" class="form-control">
+					<option disabled ng-selected="true" value=""> -- Select an Input -- </option>
+					<option value="CNA">CNA</option>
+					<option value="HHA">HHA</option>
+					<option value="SG">Security Guard</option>
+					<option value="Caregiver">Caregiver</option>
+					<option value="ESOL">ESOL</option>
+				</select>
+			</form>
+			<div class="text-center">
+				<button class="btn " ng-click="admin_search_ctrl.submitBtn()">Search</button>
+			</div>
+		</div>
+	<!--/END OF SEARCH INPUT --> 
+		<div class="col-md-6 table-responsive" id="adminSearchResultsTable">
+			<div style="width: 100%; height: 100px; overflow: auto;">
+				<table class="table-hovered" ng-if="admin_search_ctrl.showResultTable">
+					<thead>
+						<tr>
+							<th>Student Name |</th>
+							<th>Student Phone Number |</th>
+							<th>Student Program |</th>
+							<th>Student Graduation Status |</th>
+							<th>Student Payment Status |</th>
+							<th>Student Exam Status </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in admin_search_ctrl.data">
+							<td><a style="cursor: pointer;" ng-click="admin_search_ctrl.showDetail(student)">{{ student.name }}</a></td>
+							<td>{{ student.phoneNumber }}</td>
+							<td>{{ student.programViewForResultsTable }}</td>
+							<td>{{ student.graduate }}</td>
+							<td>{{ student.tuitionPaid }}</td>
+							<td>{{ student.passedExam }}</td>	
+						</tr>		
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div class="text-center" ng-if="admin_search_ctrl.searchBy === 'Program_Info' && admin_search_ctrl.showResultTable">
+				<button class="btn" ng-disabled="admin_search_ctrl.isSignInDisabled" 
+									ng-click="admin_search_ctrl.adminFunctions('signInSheet')">
+					Generate Sign In Sheet
+				</button>
+				<button class="btn" ng-disabled="admin_search_ctrl.isContactListDisabled" 
+									ng-click="admin_search_ctrl.adminFunctions('contactList')">
+					Generate Contact List
+				</button>			
+<!-- 				BELOW BUTTONS FUNCTIONALITIES THAT ARE COMMENTED OUT SHOULD BE INCLUDED IN THE ADMIN FOLDER DOC
+
+				<button class="btn">Generate Clinical Checklist</button> -->
+<!-- 				<button class="btn">Generate Payment Tracker</button>
+				<button class="btn">Generate Attendance Tracker</button> -->
+				<button class="btn">Populate Google Performance Fact Sheet</button>
+				<button class="btn">Populate Google STRF</button>
+			</div>
+		</div>
+	</div>
+	<!--/END OF SEARCH RESULTS TABLE -->
+
+
+	<div class="row" id="adminSearchResults">
+		<div class="col-md-12" ng-if="admin_search_ctrl.message">
+			{{ admin_search_ctrl.message }}
+		</div>
+	<!--/END OF SEARCH ERROR MESSAGE RESULT, IF ANY -->
+		<div class="col-md-12" ng-if="admin_search_ctrl.showFullDetail">
+	<!-- ONCE A STUDENT IS CLICKED, THIS WILL POPULATE NG VIEW WITH FULL DETAIL OF STUDENT, ALSO INITIALZED ADMIN MODIFY CONTROLLER -->
+			<!-- 
+ALL THIS BELOW CAN BE DONE AT ANOTHER LEVEL. MEANING A FUNCTION TAKES INPUT OF THE SERVER OBJ,
+											RETURN IS A OBJECT WITH KEYS OF EACH TYPE OF OUTPUT, 
+											SUCH AS ADMIN SEARCH RESULTS, AND HAVE CLIENT VIEW FEED 
+											DIRECTLY FROM THE PROPERTY OBJ FROM EACH OF THOSE KEYS 
+											DEPENDING ON WHICH OUTPUT YOU NEED OR ADD RESULTS. THIS COULD BE A SERVICE OBJ.  -->
+
+			<div>
+				Student Enrollment Date: {{ admin_search_ctrl.studentDetail.enrollmentDate }}	<!-- COULD ADD IN A FUNCTIONALITY WHERE YOU CAN CHANGE FIRST OR LAST NAME -->
+				<hr>
+			</div>
+			<div>
+				Student name: {{ admin_search_ctrl.studentDetail.name }}	
+				<hr>
+			</div>
+	<!--/END OF NAME DETAIL -->
+			<div>
+				Student phone number: {{ admin_search_ctrl.studentDetail.phoneNumber }}			
+				<hr>
+			</div>
+	<!--/END OF PHONE NUMBER DETAIL-->
+			<div>
+				Student social security number: {{ admin_search_ctrl.studentDetail.ssn }}
+				<hr>
+			</div>
+	<!--/END OF SSN DETAIL-->
+			<div>
+				Student address: {{ admin_search_ctrl.studentDetail.address }}
+				<hr>
+			</div>
+	<!--/END OF ADDRESS DETAIL -->
+			<div>
+				Student email: {{ admin_search_ctrl.studentDetail.email }}
+				<hr>
+			</div>
+	<!--/END OF EMAIL DETAIL -->
+			<div>
+				Student Marketing Survey: {{ admin_search_ctrl.studentDetail.marketingSurvey }}
+	 			<hr>
+			</div>	
+<!-- 		/END OF MARKETING SURVEY
+ -->		<div>
+					<span>Student programs:</span>
+					<table id="adminSearchProgramResultTable">
+					<tbody>
+						<tr ng-repeat="programDetails in admin_search_ctrl.studentDetail.program">
+							<td> <!-- FIRST COLUMN => PROGRAM NAME  -->
+								Program Name: {{ programDetails.programName }}
+							</td>
+							<td>	<!-- SECOND COLUMN => PROGRAM ROTATION -->
+								Program Rotation: {{ programDetails.programRotation }}
+							</td>
+							<td>
+								Student job tuition paid: 
+								<span ng-if="admin_search_ctrl.studentDetail.tuitionPaid">Tuition Paid</span>
+								<span ng-if="!(admin_search_ctrl.studentDetail.tuitionPaid)">Payment Pending, please check Payment Tracker</span>
+							</td>
+							<td>
+								Graduation Status: 
+								<span ng-if="admin_search_ctrl.studentDetail.graduate">
+									<p>Alumni</p>
+
+									<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.passedExam">
+										<p>Student exam status: Passed</p>
+									</div>
+										<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.passedExam">
+											<p>Number of Tries: {{ admin_search_ctrl.studentDetail.numberOfTries }}</p>
+										</div>
+									<div ng-if="admin_search_ctrl.studentDetail.graduate && !(admin_search_ctrl.studentDetail.passedExam)">
+										<p>Student exam status: Did not Pass</p>
+										<p>Reason for not passing: {{ admin_search_ctrl.studentDetail.noPassReason }}</p>
+									</div>				
+									<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+										<p>Student job Placed: Employed</p>
+									</div>					
+										<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+											 Employer Name: {{ admin_search_ctrl.studentDetail.jobDescription }}
+										</div>
+										<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+											Employment Status: Full-time/Part-time:
+											<span ng-if="admin_search_ctrl.studentDetail.weeklyWorkHours === 'fullTimePos'">Full Time</span>
+											<span ng-if="admin_search_ctrl.studentDetail.weeklyWorkHours === 'partTimePos'">Part Time</span>
+										</div>				
+										<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+											<p>Pay rate: {{ admin_search_ctrl.studentDetail.payRate }}</p>
+										</div>
+									<div ng-if="admin_search_ctrl.studentDetail.graduate && !(admin_search_ctrl.studentDetail.jobPlaced)">
+										<p>Student Employment Status: Unemployed</p>
+										<p>Student Reason for Unemployment: {{ admin_search_ctrl.studentDetail.noJobReason }}</p>
+										<hr>
+									</div>
+								</span>
+								<span ng-if="!(admin_search_ctrl.studentDetail.graduate)">
+									<p>Student, </p>
+									<p>Reason for not Graduating: {{ admin_search_ctrl.studentDetail.notGraduatingReason }}</p>
+								</span>
+							</td>
+						</tr>
+					</tbody>	
+				</table>
+			</div>
+<!-- 		END OF EVERY PROGRAM RELTATED OBJECT -->
+<!-- 			<div>
+				Student job tuition paid: 
+				<span ng-if="admin_search_ctrl.studentDetail.tuitionPaid">Tuition Paid</span>
+				<span ng-if="!(admin_search_ctrl.studentDetail.tuitionPaid)">Payment Pending, please check Payment Tracker</span>
+				<hr>
+			</div> -->
+	<!--/END OF TUITION STATUS DETAIL --><!-- 
+			<div>
+				Student Marketing Survey: {{ admin_search_ctrl.studentDetail.marketingSurvey }}
+	 			<hr>
+			</div> -->
+	<!--/END OF MARKETING SURVEY DETAIL  -->
+<!-- 			<div ng-if="admin_search_ctrl.studentDetail.graduate">
+				<p>Student graduate status:	Alumni</p>
+				<hr>
+			</div> -->
+	<!--/END OF GRADAUTE DETAIL  -->
+<!-- 			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.passedExam">
+				<p>Student exam status: Passed</p>
+				<hr>
+			</div>
+	/END OF EXAM STATUS DETAIL  
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.passedExam">
+				Number of Tries: {{ admin_search_ctrl.studentDetail.numberOfTries }}
+				<hr>
+			</div> -->
+	<!--/END OF NUMBER OF TRIES DETAIL --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && !(admin_search_ctrl.studentDetail.passedExam)">
+				<p>Student exam status: Did not Pass</p>
+				<p>Reason for not passing: {{ admin_search_ctrl.studentDetail.noPassReason }}</p>
+				<hr>
+			</div> -->
+	<!--/END OF REASON FOR NOT PASSING DETAIL  --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+				<p>Student job Placed: Employed</p>
+				<hr>
+			</div> -->
+	<!--/END OF EMPLOYMENT DETAIL --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+				Full-time/Part-time:
+				<span ng-if="admin_search_ctrl.studentDetail.weeklyWorkHours === 'fullTimePos'">Full Time</span>
+				<span ng-if="admin_search_ctrl.studentDetail.weeklyWorkHours === 'partTimePos'">Part Time</span>
+				<hr>
+			</div> -->
+	<!--/END OF FULLTIME/PARTTIME DETAIL  --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+				Student pay rate: {{ admin_search_ctrl.studentDetail.payRate }}
+				<hr>
+			</div> -->
+	<!--/END OF PAYRATE DETAIL --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && admin_search_ctrl.studentDetail.jobPlaced">
+				Student job description: {{ admin_search_ctrl.studentDetail.jobDescription }}
+				<hr>
+			</div> -->
+	<!--/END OF JOB DESCRIPTION DETAIL --><!-- 
+			<div ng-if="admin_search_ctrl.studentDetail.graduate && !(admin_search_ctrl.studentDetail.jobPlaced)">
+				<p>Student Employment Status: Unemployed</p>
+				<p>Student Reason for Unemployment: {{ admin_search_ctrl.studentDetail.noJobReason }}</p>
+				<hr>
+			</div> -->
+	<!--/END OF REASON FOR UNEMPLOYMENT DETAIL -->
+			<!-- <div ng-if="!(admin_search_ctrl.studentDetail.graduate)">
+				<p>Student Graduate Status: Student</p>
+				</span>
+				<p>Student Reason for not Graduating: {{ admin_search_ctrl.studentDetail.notGraduatingReason }}</p> 
+				<hr>
+			</div> -->
+	<!--/END OF REASON FOR NOT GRADUATING DETAILS AND MODIFICATION METHOD (ONLY FOR STUDENTS THAT ARE NOT GRADUATED) -->
+			<div>
+				<button class="btn" ng-click="admin_search_ctrl.delete()">
+					Delete
+				</button>
+<!-- NEW MODIFY BUTTON -->
+				<button class="btn" 
+							ng-click="admin_search_ctrl.newModifyFunction(admin_search_ctrl.studentDetail)">
+					Edit
+				</button>
+	<!--/END OF FINAL ACTION BUTTONS -->
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+</div>

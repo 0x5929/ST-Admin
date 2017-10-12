@@ -1,0 +1,36 @@
+<div id="mainWrapper" class="container">
+<!-- WE WILL PUT A SIGN IN OR SIGN UP LINK HERE, THAT WILL INITIATE THE MODAL  -->
+	<div ng-controller="landingPageController as landingPageCtrl">
+		<div ng-mouseleave="landingPageCtrl.ensureEnglish()">
+			<div ng-controller="signInModalControl as signInModalCtrl" ng-if="!($root.currentUser)" 
+					ng-mouseenter="landingPageCtrl.flipTranslation('showSignInCh')">
+				<a style="cursor: pointer; cursor: hand;" ng-click="signInModalCtrl.openModal()" ng-init="landingPageCtrl.showSignInCh=false">
+					<span ng-if="!(landingPageCtrl.showSignInCh)">
+						Sign In
+					</span>
+					<span ng-if="landingPageCtrl.showSignInCh">
+						登陸
+					</span>
+				</a>
+			</div>	
+			<div ng-controller="signUpModalControl as signUpModalCtrl" ng-if="!($root.currentUser)" 
+					ng-mouseenter="landingPageCtrl.flipTranslation('showSignUpCh')">	
+				<a style="cursor: pointer; cursor: hand;" ng-click="signUpModalCtrl.openModal();">
+					<span ng-if="!(landingPageCtrl.showSignUpCh)">
+						Sign Up
+					</span>
+					<span ng-if="landingPageCtrl.showSignUpCh">
+						註冊
+					</span>
+				</a>
+			</div>	
+			<div>	
+				<a ui-sref="Admin" style="cursor: pointer; cursor: hand;" ng-if="$root.currentUser">
+					<span>
+						ENTER
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
