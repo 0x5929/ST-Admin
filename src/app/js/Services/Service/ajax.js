@@ -7,10 +7,14 @@
 
 		function ajaxServiceHandler($http, $q) {
 
+
+			//	for development purposes, call backend server api
+			var backendAPI = 'http://localhost:8080';
+
 			this.get = function(route, configObj) {
 				var deferred = $q.defer();
 				if (configObj){
-					$http.get(route, configObj)
+					$http.get(backendAPI + route, configObj)
 						.then(function(success) {
 							deferred.resolve(success);
 						}, 
@@ -32,7 +36,7 @@
 			this.post = function(route, data, configObj) {
 				var deferred = $q.defer();
 				
-				$http.post(route, data, configObj)
+				$http.post(backendAPI + route, data, configObj)
 					.then(function(success) {
 						deferred.resolve(success);
 					}, 
@@ -45,7 +49,7 @@
 			this.put = function(route, data) {
 				var deferred = $q.defer();
 
-				$http.put(route, data)
+				$http.put(backendAPI + route, data)
 					.then(function(success) {
 						deferred.resolve(success);
 					}, 
@@ -59,7 +63,7 @@
 				//ajax delete
 				var deferred = $q.defer();
 
-				$http.delete(route)
+				$http.delete(backendAPI + route)
 					.then(function(success) {
 						deferred.resolve(success);
 				}, 

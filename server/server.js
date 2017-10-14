@@ -6,7 +6,7 @@ var async                         = require('async'),
 	path                          = require('path'),
 	express                       = require('express'),	
 	app                           = express(),	//needed
-	port                          = process.env.PORT || 8080,
+	DEFAULT_PORT                  = process.env.PORT || 8080,
 	mongoose                      = require('mongoose'),	//db
 	passport                      = require('passport'),	//user authentication
 	helmet                        = require('helmet'),	//security
@@ -85,6 +85,6 @@ app.use(csrfTokenMiddleware.invalidCsrfTokenErr);	//invalid csrf token err
 app.use(errHandling.initialErrHandler, errHandling.finalErrHandler);	//everything else
 
 //firing this baby up
-app.listen(port, console.log('magic happens on port: ', port));
+app.listen(port, console.log('server starting on port: ', DEFAULT_PORT));
 
-}());
+}) ();

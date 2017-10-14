@@ -26,7 +26,10 @@
 				//	the target directory for all output files
 
 				// filename: "bundle.js",	//string
-				filename: "[name].js"	//for mulitple entry points (not our case for SPA)
+				filename: "[name].js",	//for mulitple entry points (not our case for SPA)
+				
+				//	webpack needs to make requests (chunk loading and or HMR) to WDS 
+				publicPath: "http://localhost:8080"	//	todo: needs more specific URL
 			},
 			module: {
 				//	configuration regarding modules
@@ -43,8 +46,12 @@
 
 			devServer: {
 				proxy: {	//	proxy URLS to backend development server
-					'/api': 'http://localhost:8080',
+					'/api': {
+						target: "http://localhost:8080",
+						pathRewrite: {"^/api": ""}
+					}
 					contentBase: path.join(__dirname, 'public'),
+					port: 9090,	//	the port that webpack dev server will listen on
 					historyApiFallback: true,	//	true for index.html upon 404, object for mulitple paths
 					hot: true, 	//	hot module replacement. Depends on HotmOduleReaplacementPlugin
 					https: false,	//	true for self-signed, object for certificate authority
