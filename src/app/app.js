@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	//loading library dependencies
+	//	loading library dependencies
 	require('../lib/js/jquery.js');
 	require('../lib/js/moment.js');
 	require('angular');
@@ -18,6 +18,10 @@
 	require('../lib/js/angular-ui-router.js');
 	require('../lib/js/ui-bootstrap-tpls.js');
 	require('../lib/js/jquery.maskedinput.js');
+
+
+	//	loading resource
+	var angularResourceUtil = require('webpack-angular-resource-plugin');
 
 	// loading configurations
 	var stateRouteConfig = require('../config/stateRouteConfig.js');

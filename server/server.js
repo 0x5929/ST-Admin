@@ -11,6 +11,7 @@ var async                         = require('async'),
 	passport                      = require('passport'),	//user authentication
 	helmet                        = require('helmet'),	//security
 	csrf                          = require('csurf'),	//security
+	cors 						  = require('cors'),	//	security
 	officeGenerator               = require('officegen'),
 	google						  = require('googleapis'),
 	googleAuth					  = require('google-auth-library'),
@@ -40,6 +41,7 @@ require(path.join(__dirname, '/config/passport.js'))(passport, path);	//passport
 
 
 //Setting up express application middlewares
+app.use(cors());	//	security
 app.use(logger('dev'));
 app.use(cookieParser('kevinRenIsAweseome', { httpOnly: true }));
 app.use(bodyParser.json());
@@ -61,6 +63,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(csrf({ cookie: true }));	//security csrf setting through cookie to angular
 app.use('/', express.static(path.join(__dirname, '../src/public'))); 	//setting up the static file location
+
+
+	// if in production mode
+
+// if (app.get('env') === 'production'){
+
+// }
+
+
+//	and if in development mode 
+//	call another api
 
 //routes, passing in all the necessary module objects and also the office generator config for the construction of document obj in routes
 require(path.join(__dirname, '/routes/routes.js'))(express, app, path, bodyParser, validator, passport, 

@@ -16,7 +16,7 @@
 
 			entry: {	//	this is where webpack will start doing its magic
 				app: './src/app/app.js',	//	entry file
-				// vendor: ['angular']		//	framework
+				// vendor: ['jquery', 'angular', 'bootstrap']		//	frameworks
 			},
 			output: {
 				//	options related to how webpack emits results 
@@ -34,7 +34,7 @@
 					//	rules for modules (configure loaders, parser options, etc.)
 					{test: /\.html$/, use: ["html-loader"]},
 					{test: /\.js$/, use: ["val-loader"], exclude: [path.resolve(__dirname, 'node_modules/')]},
-					// {test: /\.css$/, use: "style-loader!css-loader"}
+					{test: /\.css$/, use: "style-loader!css-loader"}
 				]
 			},
 			plugins: [
