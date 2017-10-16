@@ -85,6 +85,6 @@ app.use(csrfTokenMiddleware.invalidCsrfTokenErr);	//invalid csrf token err
 app.use(errHandling.initialErrHandler, errHandling.finalErrHandler);	//everything else
 
 //firing this baby up
-app.listen(port, console.log('server starting on port: ', DEFAULT_PORT));
+app.listen(DEFAULT_PORT, console.log('server starting on port: ', DEFAULT_PORT));
 
 }) ();

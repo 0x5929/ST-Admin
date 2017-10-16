@@ -3,10 +3,14 @@
   "version": "0.2.0",
   "description": "STI admin app",
   "private": "true",
-  "scripts": {},
+  "scripts": {
+    "start-server-dev": "cd server && node server.js",
+    "start-client-dev": "webpack-dev-server --progress --colors",
+    "dev": "concurrently --kill-others \"npm run start-server-dev\" \"npm run start-client-dev\""
+  },
   "respository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/rennitbaby/ST-Admin.git"
   },
   "author": "Kevin Ren",
   "homepage": "",
@@ -40,8 +44,10 @@
     "passport-local": "~1.0.0"
   },
   "devDependencies": {
+    "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
     "html-loader": "^0.5.1",
+    "nodemon": "^1.12.1",
     "style-loader": "^0.19.0",
     "val-loader": "^1.0.2",
     "webpack": "^3.6.0",

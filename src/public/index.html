@@ -4,12 +4,13 @@
 <head>
 <!-- Loading Stylesheets -->
 	<!-- Loading Webpack Bundled file -->
-<!-- 	<link rel="stylesheet href="dist/bundle.css -->
+<!-- 	<link rel="stylesheet href="dist/vendor.bundle.css -->
+<!-- 	<link rel="stylesheet href="dist/app.bundle.css -->
 <!-- 	need to add bootstrap 4 -->
-	<link rel="stylesheet" href="scripts/css/bootstrap/dist/css/bootstrap.css" />
+<!-- 	<link rel="stylesheet" href="scripts/css/bootstrap/dist/css/bootstrap.css" />
 	<link rel="stylesheet" href="scripts/css/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Cookie" />
-    <link rel="stylesheet" href="scripts/css/angular-material/angular-material.css" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Cookie" /> -->
+<!--     <link rel="stylesheet" href="scripts/css/angular-material/angular-material.css" /> -->
 	<title>ST Institute</title>
 	<meta name="google-signin-scope" 
       content="https://www.googleapis.com/auth/spreadsheets">	<!-- CONNECTING GOOGLE SPREADSHEETS AUTH FROM GOOGLE API ONTO MAIN STATIC FILE(HTML) -->
@@ -18,6 +19,8 @@
 </head>
 <!-- Inititalizing Angular -->
 <body>
+	<!-- test -->
+	<h1>HELLO WORLD</h1>
 <!-- Content Loaded Dynamically using ui router -->
 	<div ui-view></div>
 <!-- BACK TO THE TOP ANCHOR can still  be used-->
@@ -25,9 +28,11 @@
 		<span class="glyphicon glyphicon-hand-up"></span>
 	</a>
 	<!-- Loading Webpack Bundled file -->
-<!-- 	<script src="dist/bundle.js"></script> -->
+<!-- 	<script src="dist/vendor.bundle.js"></script> -->
+	<script src="http://localhost:9090/dist/angular.bundle.js"></script>
+	<script src="http://localhost:9090/dist/app.bundle.js"></script>
 <!-- Loading Library Scripts -->
- 	<script src="scripts/js/jQuery/jquery.js"></script>
+<!--  	<script src="scripts/js/jQuery/jquery.js"></script>
 	<script src="scripts/js/moment/moment.js"></script>
 	<script src="scripts/js/angular/angular.js"></script>
 	<script src="scripts/js/angular-animate/angular-animate.js"></script>
@@ -41,17 +46,17 @@
 	<script src="scripts/js/fullCalendar/gcal.js"></script>
 	<script src="scripts/js/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="scripts/js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-	<script src="scripts/js/jQuery-Masked-Input-Plugin/jquery.maskedinput.js"></script>
+	<script src="scripts/js/jQuery-Masked-Input-Plugin/jquery.maskedinput.js"></script> -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 <!-- Loading Services -->
-	<script src="services/service/looksIntegration.js"></script>
+<!-- 	<script src="services/service/looksIntegration.js"></script>
 	<script src="services/factory/auth.js"></script>
 	<script src="services/factory/modal.js"></script>
 	<script src="services/factory/toast.js"></script>
 	<script src="services/service/cookies.js"></script>
-	<script src="services/service/ajax.js"></script>
+	<script src="services/service/ajax.js"></script> -->
 <!-- Loading Controller Scripts -->
-	<script src="app/Home/controllers/landingPageCtrl.js"></script>
+<!-- 	<script src="app/Home/controllers/landingPageCtrl.js"></script>
 	<script src="app/Home/controllers/signInModalCtrl.js"></script>
 	<script src="app/Home/controllers/signInModalInstanceCtrl.js"></script>
 	<script src="app/Home/controllers/signUpModalCtrl.js"></script>
@@ -60,13 +65,13 @@
 	<script src="app/Home/controllers/backToTopCtrl.js"></script>
 	<script src="app/Admin/controllers/adminSearchCtrl.js"></script>
 	<script src="app/Admin/controllers/adminAddCtrl.js"></script>
-	<script src="app/Admin/controllers/programAddModalInstanceCtrl.js"></script>
+	<script src="app/Admin/controllers/programAddModalInstanceCtrl.js"></script> -->
 <!-- Loading Application Values -->
-	<script src="services/value/studentValue.js"></script>
+<!-- 	<script src="services/value/studentValue.js"></script> -->
 <!-- Loading Application Scripts -->
-	<script src="app/app.js"></script>
+<!-- 	<script src="app/app.js"></script> -->
 <!-- Loading Directive Scripts -->
-	<script src="app/Admin/directives/jqueryMaskedInputPluginDirective.js"></script>
-	<script src="app/Admin/directives/googleSigninBtnDirective.js"></script>
+<!-- 	<script src="app/Admin/directives/jqueryMaskedInputPluginDirective.js"></script>
+	<script src="app/Admin/directives/googleSigninBtnDirective.js"></script> -->
 </body>
 </html>

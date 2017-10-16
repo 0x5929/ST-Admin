@@ -4,7 +4,7 @@
 
 	module.exports = stateRouteConfigurationHandler;
 
-	function stateRouteConfigurationHandler($stateProvider, $urlRouterProvider){
+	function stateRouteConfigurationHandler($stateProvider, $urlRouterProvider, $locationProvider){
 		//intitialize page to redirect to home
 		$urlRouterProvider.otherwise('/homePage');
 		$stateProvider
@@ -33,6 +33,9 @@
 				params: {func: null},
 				authenticate: true
 			});
+
+		//	getting rid of hash in url when using ui router
+		$locationProvider.html5Mode(true);
 	}
 
 

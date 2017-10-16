@@ -21,7 +21,7 @@
 
 
 	//	loading resource
-	var angularResourceUtil = require('webpack-angular-resource-plugin');
+	var angularResourceUtil = require('webpack-angular-resource-plugin');	//	whats this for?
 
 	// loading configurations
 	var stateRouteConfig = require('../config/stateRouteConfig.js');
