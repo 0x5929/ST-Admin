@@ -3,8 +3,8 @@
 	'use strict';
 
 	//	loading library dependencies
-	require('../lib/js/jquery.js');
-	require('../lib/js/moment.js');
+	// require('../lib/js/jquery.js');
+	// require('../lib/js/moment.js');
 	require('angular');
 	require('../lib/js/angular-animate.js');
 	require('../lib/js/angular-aria.js');	//missing

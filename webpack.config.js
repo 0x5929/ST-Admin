@@ -29,27 +29,29 @@
 				filename: "[name].bundle.js",	//for mulitple entry points (not our case for SPA)
 				
 				//	webpack needs to make requests (chunk loading and or HMR) to WDS 
-				publicPath: "http://localhost:9090/dist/"	//	todo: needs more specific URL
+				publicPath: "/dist/"	//	todo: needs more specific URL
 			},
 			module: {
 				//	configuration regarding modules
 				rules: [
 					//	rules for modules (configure loaders, parser options, etc.)
-					{test: /\.html$/, use: ["html-loader"]},
-					{test: /\.js$/, use: ["val-loader"], exclude: [path.resolve(__dirname, 'node_modules/')]},
+					{test: /\.html$/, use: "html-loader"},
+					{test: /\.js$/, use: "val-loader", exclude: [path.resolve(__dirname, 'node_modules/')]},
+					{test: require.resolve('angular'), use: ["expose-loader?angular!expose-loader?window" ,"imports-loader?this=>window"]},
+					{test: require.resolve('jquery'), use: ["expose-loader?$!expose-loader?jQuery" ,"imports-loader?$=jquery"]},
 					{test: /\.css$/, use: "style-loader!css-loader"}
 				]
 			},
 			plugins: [
 				new webpack.HotModuleReplacementPlugin(),	//default with webpack
 				// new webpack.noErrorsPlugin()
-				// new webpack.ProvidePlugin({
-				// 	$              : 'jquery',
-				// 	jQuery         : 'jquery',
-				// 	'window.jQuery': 'jquery',
-				// 	'angular'	   : 'angular',
-				// 	'window'	   : 'window'
-				// }),
+				new webpack.ProvidePlugin({
+					$              : 'jquery',
+					jQuery         : 'jquery',
+					'window.jQuery': 'jquery',
+					// 'angular'	   : 'angular',
+					'window'	   : 'window'
+				}),
 				new webpack.optimize.CommonsChunkPlugin({
 					name: 'angular',
 					filename: 'angular.bundle.js'
