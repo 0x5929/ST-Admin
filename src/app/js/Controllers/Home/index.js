@@ -2,7 +2,7 @@
 
 	'use strict';
 	//load library dependencies
-	var angular                 = require('../../../../lib/angular.js');
+	var angular                 = require('angular');
 	//load all controller dependencies inside home module
 	var landingPageCtrl         = require('./Home.landingPage.controller.js');
 	var signInModalCtrl         = require('./Home.signInModal.controller.js');
@@ -12,7 +12,7 @@
 	var signUpModalInstanceCtrl = require('./Home.signUpModalInstance.controller.js');
 	//load non-angular controller
 		//jQuery
-	require('./Home.backToTop.controller.js');
+	// require('./Home.backToTop.controller.js');
 
 	//define angular controllers
 

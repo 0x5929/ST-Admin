@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	module.exports = httpConfigurationHandler;
+	module.exports = httpConfiguration;
 
 	function httpConfiguration($httpProvider) {		//	handling rejection from server b/c unauthorized, etc..
 		$httpProvider.interceptors.push(function($q, $injector) {

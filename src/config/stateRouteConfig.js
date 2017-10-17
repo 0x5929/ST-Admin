@@ -10,16 +10,16 @@
 		$stateProvider
 			.state('Home', {
 				url: '/homePage',
-				templateUrl: 'app/Home/view/Home.html'
+				templateUrl: 'http://localhost:9090/src/app/views/Home/Home.html'
 			})
 			.state('Admin', {
-				templateUrl: 'app/Admin/view/admin.html',
+				templateUrl: 'app/views/Admin/admin.html',
 				authenticate: true
 			})
 			.state('Admin.Admin_Search', {
 				views: {
 					'AdminView@Admin': {
-						templateUrl: 'app/Admin/view/Admin_Search.html'
+						templateUrl: 'app/views/Admin/Admin_Search.html'
 					}
 				},
 				authenticate: true
@@ -27,7 +27,7 @@
 			.state('Admin.Admin_Add', {
 				views: {
 					'AdminView@Admin': {
-						templateUrl: 'app/Admin/view/Admin_Add.html'
+						templateUrl: 'app/views/Admin/Admin_Add.html'
 					}
 				},
 				params: {func: null},
@@ -35,7 +35,10 @@
 			});
 
 		//	getting rid of hash in url when using ui router
-		$locationProvider.html5Mode(true);
+		// $locationProvider.html5Mode({
+		// 	enabled    : true,
+		// 	requireBase: false
+		// });
 	}
 
 

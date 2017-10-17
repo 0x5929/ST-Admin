@@ -2,11 +2,11 @@
 
 	'use strict';
 	//load library dependcies
-	var angular                     = require('../../../../lib/angular.js');
+	var angular                     = require('angular');
 	//load all controller dependencies inside admin module. 
 	var adminAddCtrl                = require('./Admin.add.controller.js');
 	var adminSearchCtrl             = require('./Admin.search.controller.js');
-	var programAddModalInstanceCtrl = require('./Admin.programAddModalInstanceCtrl.js');
+	var programAddModalInstanceCtrl = require('./Admin.programAddModal.controller.js');
 	
 	
 

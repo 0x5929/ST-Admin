@@ -7,21 +7,21 @@
 	// require('../lib/js/moment.js');
 	require('angular');
 	require('../lib/js/angular-animate.js');
-	require('../lib/js/angular-aria.js');	//missing
+	require('../lib/js/angular-aria.js');
 	require('../lib/js/angular-material.js');
 	require('../lib/js/angular-cookies.js');
-	require('../lib/js/angular-file-save.js');
-	require('../lib/js/angular-file-save.bundle.js');	//missing
-	require('../lib/js/calendar.js');
-	require('../lib/js/fullcalendar.js');
-	require('../lib/js/gcal.js');
+	require('../lib/js/angular-file-saver.js');
+	require('../lib/js/angular-file-saver.bundle.js');	
+	// require('../lib/js/calendar.js');
+	// require('../lib/js/fullcalendar.js');
+	// require('../lib/js/gcal.js');
 	require('../lib/js/angular-ui-router.js');
 	require('../lib/js/ui-bootstrap-tpls.js');
-	require('../lib/js/jquery.maskedinput.js');
+	// require('../lib/js/jquery.maskedinput.js');
 
 
-	//	loading resource
-	var angularResourceUtil = require('webpack-angular-resource-plugin');	//	whats this for?
+	// //	loading resource
+	// var angularResourceUtil = require('webpack-angular-resource-plugin');	//	whats this for?
 
 	// loading configurations
 	var stateRouteConfig = require('../config/stateRouteConfig.js');
@@ -138,11 +138,10 @@
 	angular.module('myApp', [
 		'ui.bootstrap',
 		'ui.router',
-		'ui.calendar',
+		// 'ui.calendar',
 		'ngMaterial',
 		'ngCookies',
 		'ngFileSaver',
-		'services.looksIntegrationByUIB',
 		'services.AuthenticationFactory',
 		'services.toastFactory',
 		'services.modalService',
@@ -152,7 +151,7 @@
 		'myApp.admin'])
 	//configuring how the application is routed, basically directly maps the webpage,
 	//which its own properties, such as views security(auth) options and controllers that can have their own servcies they depend on
-		.config(['$stateProvider', '$urlRouterProvider', stateRouteConfig])
+		.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', stateRouteConfig])
 		.config(['$httpProvider', httpConfig])
 		.run(['$rootScope', '$state', '$timeout', '$cookies', '$http', 'AuthenticationFactory', 'modalFactory', 'toastFactory', appRunConfig]);
 
