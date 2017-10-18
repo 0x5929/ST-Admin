@@ -172,4 +172,7 @@
 	// factories.modalFactory();
 	// factories.authFactory();
 
+
+	console.log('APP.JS IS NOW LOADED');
+
 }) ();

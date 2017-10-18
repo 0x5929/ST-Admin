@@ -2,6 +2,10 @@
 
 	'use strict';
 
+	//loading html templates for UI Router
+	var homePage = require('../app/views/Home/Home.html');
+
+
 	module.exports = stateRouteConfigurationHandler;
 
 	function stateRouteConfigurationHandler($stateProvider, $urlRouterProvider, $locationProvider){
@@ -10,7 +14,7 @@
 		$stateProvider
 			.state('Home', {
 				url: '/homePage',
-				templateUrl: 'http://localhost:9090/src/app/views/Home/Home.html'
+				template: homePage
 			})
 			.state('Admin', {
 				templateUrl: 'app/views/Admin/admin.html',
