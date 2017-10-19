@@ -35,7 +35,7 @@
 				//	configuration regarding modules
 				rules: [
 					//	rules for modules (configure loaders, parser options, etc.)
-					{test: /\.html$/, use: "raw-loader"},	//raw loader vs html loader, which one better handles html files
+					{test: /\.html$/, use: "html-loader"},	
 					// {test: /\.js$/, use: "val-loader", exclude: [path.resolve(__dirname, 'node_modules/')]},
 					// {test: require.resolve('angular'), use: ["imports-loader?this=>window"]},
 					// // {test: require.resolve('jquery'), use: ["expose-loader?$!expose-loader?jQuery" ,"imports-loader?$=jquery"]},

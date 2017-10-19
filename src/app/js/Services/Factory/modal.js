@@ -3,6 +3,13 @@
 	// angular.module('services.modalService', ['services.looksIntegrationByUIB'])
 	// 	.factory('modalFactory', ['$rootScope', '$uibModal', '$q', modalFactoryHandler]);
 
+
+		//	importing all the html templates (so webpack wont complaint about it)
+
+		var signInModalTemplate = require('../../../views/Home/signIn/signInModal.html');
+		var signUpModalTemplate = require('../../../views/Home/signUp/signUpModal.html');
+		var addProgramModalTemplate = require('../../../views/Admin/modalView/addProgramModal.html');
+
 		module.exports = modalFactoryHandler
 
 		function modalFactoryHandler($rootScope, $uibModal, $q) {
@@ -19,13 +26,13 @@
 
 					function signInModalService () {
 						var modalInstance = $uibModal.open({
-						  animation: true,
-					      ariaLabelledBy: 'modal-title',
-					      ariaDescribedBy: 'modal-body',
-					      templateUrl: 'app/Home/view/signIn/signInModal.html', 
-					      controller: 	'signInModalInstanceController',
-					      controllerAs: 'signInModalInstanceCtrl',
-					      size: 'lg'
+							animation      : true,
+							ariaLabelledBy : 'modal-title',
+							ariaDescribedBy: 'modal-body',
+							template       : signInModalTemplate, 
+							controller     : 	'signInModalInstanceController',
+							controllerAs   : 'signInModalInstanceCtrl',
+							size           : 'lg'
 						});
 
 						return modalInstance.result.then(assignCurrentUser);
@@ -33,13 +40,13 @@
 
 					function signUpModalService () {
 						var modalInstance = $uibModal.open({
-						  animation: true,
-					      ariaLabelledBy: 'modal-title',
-					      ariaDescribedBy: 'modal-body',
-					      templateUrl: 'app/Home/view/signUp/signUpModal.html', 
-					      controller: 	'signUpModalInstanceController',
-					      controllerAs: 'signUpModalInstanceCtrl',
-					      size: 'lg'
+							animation      : true,
+							ariaLabelledBy : 'modal-title',
+							ariaDescribedBy: 'modal-body',
+							template       : signUpModalTemplate, 
+							controller     : 	'signUpModalInstanceController',
+							controllerAs   : 'signUpModalInstanceCtrl',
+							size           : 'lg'
 						});
 
 						return modalInstance.result.then(assignCurrentUser);
@@ -48,15 +55,15 @@
 					function addProgramModalService(programArr) {	//added $q deferred, because the calling function needs it to return it as a promise to be chained with the modal promise
 						var deferred =  $q.defer();
 						var modalInstance = $uibModal.open({
-						  animation: true,
-					      ariaLabelledBy: 'modal-title',
-					      ariaDescribedBy: 'modal-body',
-					      templateUrl: 'app/Admin/view/modalView/addProgramModal.html', 
-					      controller: 	'programAddModalInstanceController',
-					      controllerAs: 'programAddModalInstanceCtrl',
-					      // bindToController: true,
-					      // scope: $scope,
-					      backdrop: true,
+							animation          : true,
+							ariaLabelledBy     : 'modal-title',
+							ariaDescribedBy    : 'modal-body',
+							template           : addProgramModalTemplate, 
+							controller         : 	'programAddModalInstanceController',
+							controllerAs       : 'programAddModalInstanceCtrl',
+							// bindToController: true,
+							// scope           : $scope,
+							backdrop           : true,
 					      resolve: {
 					      	program: function() {
 					      		return programArr;

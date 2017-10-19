@@ -3,8 +3,10 @@
 	'use strict';
 
 	//loading html templates for UI Router
-	var homePage = require('../app/views/Home/Home.html');
-
+	var homePage        = require('../app/views/Home/Home.html');
+	var adminPage       = require('../app/views/Admin/admin.html');
+	var adminAddPage    = require('../app/views/Admin/Admin_Add.html');
+	var adminSearchPage = require('../app/views/Admin/Admin_Search.html');
 
 	module.exports = stateRouteConfigurationHandler;
 
@@ -17,13 +19,13 @@
 				template: homePage
 			})
 			.state('Admin', {
-				templateUrl: 'app/views/Admin/admin.html',
+				template: adminPage,
 				authenticate: true
 			})
 			.state('Admin.Admin_Search', {
 				views: {
 					'AdminView@Admin': {
-						templateUrl: 'app/views/Admin/Admin_Search.html'
+						template: adminSearchPage
 					}
 				},
 				authenticate: true
@@ -31,7 +33,7 @@
 			.state('Admin.Admin_Add', {
 				views: {
 					'AdminView@Admin': {
-						templateUrl: 'app/views/Admin/Admin_Add.html'
+						template: adminAddPage
 					}
 				},
 				params: {func: null},
